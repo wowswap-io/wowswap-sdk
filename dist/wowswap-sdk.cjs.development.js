@@ -1397,7 +1397,7 @@ var Router = /*#__PURE__*/function () {
 
     var deadline = "0x" + (Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16); // const useFeeOnTransfer = Boolean(options.feeOnTransfer)
 
-    var leverageFactor = "0x" + JSBI.multiply(JSBI.BigInt(options.leverageFactor || 1), JSBI.exponentiate(TEN, JSBI.BigInt(4))).toString(16);
+    var leverageFactor = "0x" + Math.floor((options.leverageFactor || 1) * Math.pow(10, 4)).toString(16);
     var isOpenPosition = options.isOpenPosition,
         lendable = options.lendable,
         tradeble = options.tradeble;
