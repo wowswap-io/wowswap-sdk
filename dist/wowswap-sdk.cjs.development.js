@@ -1392,7 +1392,8 @@ var Router = /*#__PURE__*/function () {
     !!(etherIn && etherOut) ?  invariant(false, 'ETHER_IN_OUT')  : void 0;
     !(options.ttl > 0) ?  invariant(false, 'TTL')  : void 0;
     var trader = validateAndParseAddress(options.recipient);
-    var amountIn = toHex(trade.maximumAmountIn(options.allowedSlippage)); // const amountOut: string = toHex(trade.minimumAmountOut(options.allowedSlippage))
+    var amountIn = toHex(options.amountIn); // const amountIn: string = toHex(trade.maximumAmountIn(options.allowedSlippage))
+    // const amountOut: string = toHex(trade.minimumAmountOut(options.allowedSlippage))
     // const path: string[] = trade.route.path.map(token => token.address)
 
     var deadline = "0x" + (Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16); // const useFeeOnTransfer = Boolean(options.feeOnTransfer)

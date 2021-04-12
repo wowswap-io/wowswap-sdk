@@ -1,4 +1,4 @@
-import { Percent, Trade } from './entities';
+import { CurrencyAmount, Percent, Trade } from './entities';
 /**
  * Options for producing the arguments to send call to the router.
  */
@@ -31,6 +31,7 @@ export interface TradeOptions {
     isOpenPosition: boolean;
     tradeble: string;
     lendable?: string;
+    amountIn: CurrencyAmount;
 }
 /**
  * The parameters to use in the call to the Uniswap V2 Router to execute a trade.
