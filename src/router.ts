@@ -39,6 +39,7 @@ export interface TradeOptions {
 
   tradeble: string
   lendable?: string
+  amountIn: CurrencyAmount
 }
 
 /**
@@ -86,13 +87,14 @@ export abstract class Router {
     invariant(options.ttl > 0, 'TTL')
 
     const trader: string = validateAndParseAddress(options.recipient)
-    const amountIn: string = toHex(trade.maximumAmountIn(options.allowedSlippage))
+    const amountIn: string = toHex(options.amountIn)
+    // const amountIn: string = toHex(trade.maximumAmountIn(options.allowedSlippage))
     // const amountOut: string = toHex(trade.minimumAmountOut(options.allowedSlippage))
     // const path: string[] = trade.route.path.map(token => token.address)
     const deadline = `0x${(Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16)}`
     // const useFeeOnTransfer = Boolean(options.feeOnTransfer)
 
-    const leverageFactor = `0x${Math.floor((options.leverageFactor || 1) * (10 ** 4)).toString(16)}`
+    const leverageFactor = `0x${Math.floor((options.leverageFactor || 1) * 10 ** 4).toString(16)}`
 
     const { isOpenPosition, lendable, tradeble } = options
 
