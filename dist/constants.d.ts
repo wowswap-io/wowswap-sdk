@@ -3,6 +3,7 @@ export declare type BigintIsh = JSBI | bigint | string;
 export declare enum ChainId {
     MAINNET = 56,
     BSCTESTNET = 97,
+    MATIC = 137,
     LOCALNET = 57
 }
 export declare enum TradeType {
@@ -17,11 +18,13 @@ export declare enum Rounding {
 export declare const FACTORY_ADDRESS: {
     56: string;
     97: string;
+    137: string;
     57: string;
 };
 export declare const INIT_CODE_HASH: {
     56: string;
     97: string;
+    137: string;
     57: string;
 };
 export declare const MINIMUM_LIQUIDITY: JSBI;
