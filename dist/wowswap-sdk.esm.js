@@ -348,30 +348,43 @@ function sortedInsert(items, add, maxSize, comparator) {
   }
 }
 
+var _Currency$ETHER_MAP;
 /**
  * A currency is any fungible financial instrument on Ethereum, including Ether and all ERC20 tokens.
  *
  * The only instance of the base class `Currency` is Ether.
  */
 
-var Currency =
-/**
- * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
- * @param decimals decimals of the currency
- * @param symbol symbol of the currency
- * @param name of the currency
- */
-function Currency(decimals, symbol, name) {
-  validateSolidityTypeInstance(JSBI.BigInt(decimals), SolidityType.uint8);
-  this.decimals = decimals;
-  this.symbol = symbol;
-  this.name = name;
-};
+var Currency = /*#__PURE__*/function () {
+  /**
+   * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
+   * @param decimals decimals of the currency
+   * @param symbol symbol of the currency
+   * @param name of the currency
+   */
+  function Currency(decimals, symbol, name) {
+    validateSolidityTypeInstance(JSBI.BigInt(decimals), SolidityType.uint8);
+    this.decimals = decimals;
+    this.symbol = symbol;
+    this.name = name;
+  }
+
+  Currency.getBaseCurrency = function getBaseCurrency() {
+    return Currency.ETHER_MAP[id.getId()];
+  };
+
+  return Currency;
+}();
 /**
  * The only instance of the base class `Currency`.
  */
 
-Currency.ETHER = /*#__PURE__*/new Currency(18, 'BNB', 'Binance');
+Currency.ETHER = /*#__PURE__*/new Currency(18, 'BNB', 'Native Token');
+/**
+ * The only instance of the base class `Currency`. For different networks
+ */
+
+Currency.ETHER_MAP = (_Currency$ETHER_MAP = {}, _Currency$ETHER_MAP[ChainId.MAINNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.BSCTESTNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.LOCALNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.MATIC] = /*#__PURE__*/new Currency(18, 'MATIC', 'Matic'), _Currency$ETHER_MAP);
 var ETHER = Currency.ETHER;
 
 var _WETH;
@@ -1086,13 +1099,13 @@ function tradeComparator(a, b) {
 
 function wrappedAmount(currencyAmount, chainId) {
   if (currencyAmount instanceof TokenAmount) return currencyAmount;
-  if (currencyAmount.currency === ETHER) return new TokenAmount(WETH[chainId], currencyAmount.raw);
+  if (currencyAmount.currency === Currency.getBaseCurrency()) return new TokenAmount(WETH[chainId], currencyAmount.raw);
    process.env.NODE_ENV !== "production" ? invariant(false, 'CURRENCY') : invariant(false) ;
 }
 
 function wrappedCurrency(currency, chainId) {
   if (currency instanceof Token) return currency;
-  if (currency === ETHER) return WETH[chainId];
+  if (currency === Currency.getBaseCurrency()) return WETH[chainId];
    process.env.NODE_ENV !== "production" ? invariant(false, 'CURRENCY') : invariant(false) ;
 }
 /**

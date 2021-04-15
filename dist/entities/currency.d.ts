@@ -1,3 +1,4 @@
+import { ChainId } from '../constants';
 /**
  * A currency is any fungible financial instrument on Ethereum, including Ether and all ERC20 tokens.
  *
@@ -11,6 +12,16 @@ export declare class Currency {
      * The only instance of the base class `Currency`.
      */
     static readonly ETHER: Currency;
+    /**
+     * The only instance of the base class `Currency`. For different networks
+     */
+    static readonly ETHER_MAP: {
+        56: Currency;
+        97: Currency;
+        57: Currency;
+        137: Currency;
+    };
+    static getBaseCurrency(): Currency;
     /**
      * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
      * @param decimals decimals of the currency
