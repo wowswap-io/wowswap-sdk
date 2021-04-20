@@ -595,7 +595,7 @@ var CurrencyAmount = /*#__PURE__*/function (_Fraction) {
 
 
   CurrencyAmount.ether = function ether(amount) {
-    return new CurrencyAmount(ETHER, amount);
+    return new CurrencyAmount(Currency.getBaseCurrency(), amount);
   };
 
   var _proto = CurrencyAmount.prototype;
