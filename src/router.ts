@@ -39,6 +39,8 @@ export interface TradeOptions {
 
   tradeble: string
   lendable?: string
+  proxyble?: string
+
   amountIn: CurrencyAmount
 }
 
@@ -96,7 +98,7 @@ export abstract class Router {
 
     const leverageFactor = `0x${Math.floor((options.leverageFactor || 1) * 10 ** 4).toString(16)}`
 
-    const { isOpenPosition, lendable, tradeble } = options
+    const { isOpenPosition, lendable, tradeble, proxyble } = options
 
     let methodName: string
     let args: (string | string[])[]
@@ -115,16 +117,28 @@ export abstract class Router {
           if (!lendable) {
             throw new Error('Lendable is required for this transaction')
           }
-          methodName = 'openPosition'
-          args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
-          value = ZERO_HEX
+          if (proxyble) {
+            methodName = 'openProxyPosition'
+            args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline]
+            value = ZERO_HEX
+          } else {
+            methodName = 'openPosition'
+            args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
+            value = ZERO_HEX
+          }
         } else {
           if (!lendable) {
             throw new Error('Lendable is required for this transaction')
           }
-          methodName = 'closePosition'
-          args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
-          value = ZERO_HEX
+          if (proxyble) {
+            methodName = 'closeProxyPosition'
+            args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline]
+            value = ZERO_HEX
+          } else {
+            methodName = 'closePosition'
+            args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
+            value = ZERO_HEX
+          }
         }
         break
       case TradeType.EXACT_OUTPUT:

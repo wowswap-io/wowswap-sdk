@@ -31,6 +31,7 @@ export interface TradeOptions {
     isOpenPosition: boolean;
     tradeble: string;
     lendable?: string;
+    proxyble?: string;
     amountIn: CurrencyAmount;
 }
 /**
