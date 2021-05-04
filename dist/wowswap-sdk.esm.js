@@ -1415,7 +1415,8 @@ var Router = /*#__PURE__*/function () {
     var leverageFactor = "0x" + Math.floor((options.leverageFactor || 1) * Math.pow(10, 4)).toString(16);
     var isOpenPosition = options.isOpenPosition,
         lendable = options.lendable,
-        tradeble = options.tradeble;
+        tradeble = options.tradeble,
+        proxyble = options.proxyble;
     var methodName;
     var args;
     var value;
@@ -1435,17 +1436,29 @@ var Router = /*#__PURE__*/function () {
             throw new Error('Lendable is required for this transaction');
           }
 
-          methodName = 'openPosition';
-          args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline];
-          value = ZERO_HEX;
+          if (proxyble) {
+            methodName = 'openProxyPosition';
+            args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline];
+            value = ZERO_HEX;
+          } else {
+            methodName = 'openPosition';
+            args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline];
+            value = ZERO_HEX;
+          }
         } else {
           if (!lendable) {
             throw new Error('Lendable is required for this transaction');
           }
 
-          methodName = 'closePosition';
-          args = [amountIn, '0x0', lendable, tradeble, trader, deadline];
-          value = ZERO_HEX;
+          if (proxyble) {
+            methodName = 'closeProxyPosition';
+            args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline];
+            value = ZERO_HEX;
+          } else {
+            methodName = 'closePosition';
+            args = [amountIn, '0x0', lendable, tradeble, trader, deadline];
+            value = ZERO_HEX;
+          }
         }
 
         break;
