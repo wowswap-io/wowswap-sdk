@@ -22,11 +22,12 @@ export class Currency {
   /**
    * The only instance of the base class `Currency`. For different networks
    */
-  public static readonly ETHER_MAP = {
+  public static readonly ETHER_MAP : Record<ChainId, Currency> = {
     [ChainId.MAINNET]: new Currency(18, 'BNB', 'Binance'),
     [ChainId.BSCTESTNET]: new Currency(18, 'BNB', 'Binance'),
     [ChainId.LOCALNET]: new Currency(18, 'BNB', 'Binance'),
-    [ChainId.MATIC]: new Currency(18, 'MATIC', 'Matic')
+    [ChainId.MATIC]: new Currency(18, 'MATIC', 'Matic'),
+    [ChainId.HECO]: new Currency(18, 'HT', 'Heco Token'),
   }
 
   public static getBaseCurrency() {

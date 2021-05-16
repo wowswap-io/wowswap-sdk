@@ -15,12 +15,7 @@ export declare class Currency {
     /**
      * The only instance of the base class `Currency`. For different networks
      */
-    static readonly ETHER_MAP: {
-        56: Currency;
-        97: Currency;
-        57: Currency;
-        137: Currency;
-    };
+    static readonly ETHER_MAP: Record<ChainId, Currency>;
     static getBaseCurrency(): Currency;
     /**
      * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.

@@ -71,6 +71,13 @@ export const WETH = {
     'WMATIC',
     'Wrapped MATIC'
   ),
+  [ChainId.HECO]: new Token(
+    ChainId.HECO,
+    '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F',
+    18,
+    'WHT',
+    'Wrapped HT'
+  ),
   [ChainId.BSCTESTNET]: new Token(
     ChainId.BSCTESTNET,
     '0xDa097367d6be37ca72A1FedfCa592eCb10FBb5Dd',
