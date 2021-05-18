@@ -451,7 +451,7 @@ function currencyEquals(currencyA, currencyB) {
     return currencyA === currencyB;
   }
 }
-var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.MATIC] = /*#__PURE__*/new Token(ChainId.MATIC, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped MATIC'), _WETH[ChainId.HECO] = /*#__PURE__*/new Token(ChainId.HECO, '0x5545153CCFcA01fbd7Dd11C0b23ba694D9509A6F', 18, 'WHT', 'Wrapped HT'), _WETH[ChainId.BSCTESTNET] = /*#__PURE__*/new Token(ChainId.BSCTESTNET, '0xDa097367d6be37ca72A1FedfCa592eCb10FBb5Dd', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.LOCALNET] = /*#__PURE__*/new Token(ChainId.LOCALNET, '0x22A4Cc8c2C6881983ceBAb4d23cd952654Be2F1D', 18, 'WBNB', 'Wrapped BNB'), _WETH);
+var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.MATIC] = /*#__PURE__*/new Token(ChainId.MATIC, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped MATIC'), _WETH[ChainId.HECO] = /*#__PURE__*/new Token(ChainId.HECO, '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f', 18, 'WHT', 'Wrapped HT'), _WETH[ChainId.BSCTESTNET] = /*#__PURE__*/new Token(ChainId.BSCTESTNET, '0xDa097367d6be37ca72A1FedfCa592eCb10FBb5Dd', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.LOCALNET] = /*#__PURE__*/new Token(ChainId.LOCALNET, '0x22A4Cc8c2C6881983ceBAb4d23cd952654Be2F1D', 18, 'WBNB', 'Wrapped BNB'), _WETH);
 
 var _toSignificantRoundin, _toFixedRounding;
 var Decimal = /*#__PURE__*/toFormat(_Decimal);
