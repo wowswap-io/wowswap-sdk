@@ -1425,12 +1425,24 @@ var Router = /*#__PURE__*/function () {
     switch (trade.tradeType) {
       case TradeType.EXACT_INPUT:
         if (etherIn) {
-          methodName = 'openPositionETH';
-          args = [leverageFactor, '0x0', tradeble, trader, deadline];
+          if (proxyble) {
+            methodName = 'openProxyPositionETH';
+            args = [leverageFactor, '0x0', proxyble, tradeble, trader, deadline];
+          } else {
+            methodName = 'openPositionETH';
+            args = [leverageFactor, '0x0', tradeble, trader, deadline];
+          }
+
           value = amountIn;
         } else if (!isOpenPosition && !lendable) {
-          methodName = 'closePositionETH';
-          args = [amountIn, '0x0', tradeble, trader, deadline];
+          if (proxyble) {
+            methodName = 'closeProxyPositionETH';
+            args = [amountIn, '0x0', proxyble, tradeble, trader, deadline];
+          } else {
+            methodName = 'closePositionETH';
+            args = [amountIn, '0x0', tradeble, trader, deadline];
+          }
+
           value = ZERO_HEX;
         } else if (isOpenPosition) {
           if (!lendable) {
