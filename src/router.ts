@@ -106,8 +106,7 @@ export abstract class Router {
 
     let methodName: string
     let args: (string | string[])[]
-    let value: string
-    console.log(isShortTrade)
+    let value: string = ZERO_HEX
     switch (trade.tradeType) {
       case TradeType.EXACT_INPUT:
         if (etherIn) {
@@ -137,7 +136,6 @@ export abstract class Router {
             if (isOpenPosition) {
               methodName = 'openShortPosition'
               args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
-              value = amountIn
             } else {
               methodName = 'closeShortPosition'
               args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
