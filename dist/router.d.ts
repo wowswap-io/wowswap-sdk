@@ -29,6 +29,7 @@ export interface TradeOptions {
      * Set is open or close position
      */
     isOpenPosition: boolean;
+    isShortTrade?: boolean;
     tradeble: string;
     lendable?: string;
     proxyble?: string;

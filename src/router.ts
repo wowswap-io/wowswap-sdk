@@ -36,6 +36,10 @@ export interface TradeOptions {
    * Set is open or close position
    */
   isOpenPosition: boolean
+  /*
+  * Set is short position
+  * */
+  isShortTrade?: boolean
 
   tradeble: string
   lendable?: string
@@ -98,11 +102,12 @@ export abstract class Router {
 
     const leverageFactor = `0x${Math.floor((options.leverageFactor || 1) * 10 ** 4).toString(16)}`
 
-    const { isOpenPosition, lendable, tradeble, proxyble } = options
+    const { isOpenPosition, lendable, tradeble, proxyble, isShortTrade } = options
 
     let methodName: string
     let args: (string | string[])[]
     let value: string
+    console.log(isShortTrade)
     switch (trade.tradeType) {
       case TradeType.EXACT_INPUT:
         if (etherIn) {
@@ -116,39 +121,56 @@ export abstract class Router {
           value = amountIn
         } else if (!isOpenPosition && !lendable) {
           if (proxyble) {
-          methodName = 'closeProxyPositionETH'
-          args = [amountIn, '0x0', proxyble, tradeble, trader, deadline]
-        } else {
+            methodName = 'closeProxyPositionETH'
+            args = [amountIn, '0x0', proxyble, tradeble, trader, deadline]
+          } else {
             methodName = 'closePositionETH'
             args = [amountIn, '0x0', tradeble, trader, deadline]
-
           }
           value = ZERO_HEX
-        } else if (isOpenPosition) {
-          if (!lendable) {
-            throw new Error('Lendable is required for this transaction')
-          }
-          if (proxyble) {
-            methodName = 'openProxyPosition'
-            args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline]
-            value = ZERO_HEX
-          } else {
-            methodName = 'openPosition'
-            args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
-            value = ZERO_HEX
-          }
         } else {
-          if (!lendable) {
-            throw new Error('Lendable is required for this transaction')
-          }
-          if (proxyble) {
-            methodName = 'closeProxyPosition'
-            args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline]
-            value = ZERO_HEX
+          if (isShortTrade) {
+            if (!lendable) {
+              throw new Error('Lendable is required for this transaction')
+            }
+
+            if (isOpenPosition) {
+              methodName = 'openShortPosition'
+              args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
+              value = amountIn
+            } else {
+              methodName = 'closeShortPosition'
+              args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
+              value = amountIn
+            }
           } else {
-            methodName = 'closePosition'
-            args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
-            value = ZERO_HEX
+            if (isOpenPosition) {
+              if (!lendable) {
+                throw new Error('Lendable is required for this transaction')
+              }
+              if (proxyble) {
+                methodName = 'openProxyPosition'
+                args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline]
+                value = ZERO_HEX
+              } else {
+                methodName = 'openPosition'
+                args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
+                value = ZERO_HEX
+              }
+            } else {
+              if (!lendable) {
+                throw new Error('Lendable is required for this transaction')
+              }
+              if (proxyble) {
+                methodName = 'closeProxyPosition'
+                args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline]
+                value = ZERO_HEX
+              } else {
+                methodName = 'closePosition'
+                args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
+                value = ZERO_HEX
+              }
+            }
           }
         }
         break
