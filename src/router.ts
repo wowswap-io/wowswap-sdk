@@ -138,8 +138,7 @@ export abstract class Router {
               args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
             } else {
               methodName = 'closeShortPosition'
-              args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
-              value = amountIn
+              args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
             }
           } else {
             if (isOpenPosition) {
