@@ -37,8 +37,8 @@ export interface TradeOptions {
    */
   isOpenPosition: boolean
   /*
-  * Set is short position
-  * */
+   * Set is short position
+   * */
   isShortTrade?: boolean
 
   tradeble: string
@@ -134,11 +134,21 @@ export abstract class Router {
             }
 
             if (isOpenPosition) {
-              methodName = 'openShortPosition'
-              args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
+              if (proxyble) {
+                methodName = 'openProxyShortPosition'
+                args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline]
+              } else {
+                methodName = 'openShortPosition'
+                args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
+              }
             } else {
-              methodName = 'closeShortPosition'
-              args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
+              if (proxyble) {
+                methodName = 'closeProxyShortPosition'
+                args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline]
+              } else {
+                methodName = 'closeShortPosition'
+                args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
+              }
             }
           } else {
             if (isOpenPosition) {

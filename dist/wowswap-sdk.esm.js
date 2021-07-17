@@ -1417,10 +1417,11 @@ var Router = /*#__PURE__*/function () {
     var isOpenPosition = options.isOpenPosition,
         lendable = options.lendable,
         tradeble = options.tradeble,
-        proxyble = options.proxyble;
+        proxyble = options.proxyble,
+        isShortTrade = options.isShortTrade;
     var methodName;
     var args;
-    var value;
+    var value = ZERO_HEX;
 
     switch (trade.tradeType) {
       case TradeType.EXACT_INPUT:
@@ -1444,33 +1445,59 @@ var Router = /*#__PURE__*/function () {
           }
 
           value = ZERO_HEX;
-        } else if (isOpenPosition) {
-          if (!lendable) {
-            throw new Error('Lendable is required for this transaction');
-          }
-
-          if (proxyble) {
-            methodName = 'openProxyPosition';
-            args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline];
-            value = ZERO_HEX;
-          } else {
-            methodName = 'openPosition';
-            args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline];
-            value = ZERO_HEX;
-          }
         } else {
-          if (!lendable) {
-            throw new Error('Lendable is required for this transaction');
-          }
+          if (isShortTrade) {
+            if (!lendable) {
+              throw new Error('Lendable is required for this transaction');
+            }
 
-          if (proxyble) {
-            methodName = 'closeProxyPosition';
-            args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline];
-            value = ZERO_HEX;
+            if (isOpenPosition) {
+              if (proxyble) {
+                methodName = 'openProxyShortPosition';
+                args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline];
+              } else {
+                methodName = 'openShortPosition';
+                args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline];
+              }
+            } else {
+              if (proxyble) {
+                methodName = 'closeProxyShortPosition';
+                args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline];
+              } else {
+                methodName = 'closeShortPosition';
+                args = [amountIn, '0x0', lendable, tradeble, trader, deadline];
+              }
+            }
           } else {
-            methodName = 'closePosition';
-            args = [amountIn, '0x0', lendable, tradeble, trader, deadline];
-            value = ZERO_HEX;
+            if (isOpenPosition) {
+              if (!lendable) {
+                throw new Error('Lendable is required for this transaction');
+              }
+
+              if (proxyble) {
+                methodName = 'openProxyPosition';
+                args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline];
+                value = ZERO_HEX;
+              } else {
+                methodName = 'openPosition';
+                args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline];
+                value = ZERO_HEX;
+              }
+            } else {
+              if (!lendable) {
+                throw new Error('Lendable is required for this transaction');
+              }
+
+              if (proxyble) {
+                methodName = 'closeProxyPosition';
+                args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline];
+                value = ZERO_HEX;
+              } else {
+                methodName = 'closePosition';
+                args = [amountIn, '0x0', lendable, tradeble, trader, deadline];
+                value = ZERO_HEX;
+              }
+            }
           }
         }
 
