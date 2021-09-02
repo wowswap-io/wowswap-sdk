@@ -94,12 +94,8 @@ export abstract class Router {
 
     const trader: string = validateAndParseAddress(options.recipient)
     const amountIn: string = toHex(options.amountIn)
-    // const amountIn: string = toHex(trade.maximumAmountIn(options.allowedSlippage))
-    // const amountOut: string = toHex(trade.minimumAmountOut(options.allowedSlippage))
-    // const path: string[] = trade.route.path.map(token => token.address)
+    const amountOut: string = toHex(trade.minimumAmountOut(options.allowedSlippage))
     const deadline = `0x${(Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16)}`
-    // const useFeeOnTransfer = Boolean(options.feeOnTransfer)
-
     const leverageFactor = `0x${Math.floor((options.leverageFactor || 1) * 10 ** 4).toString(16)}`
 
     const { isOpenPosition, lendable, tradeble, proxyble, isShortTrade } = options
@@ -112,19 +108,19 @@ export abstract class Router {
         if (etherIn) {
           if (proxyble) {
             methodName = 'openProxyPositionETH'
-            args = [leverageFactor, '0x0', proxyble, tradeble, trader, deadline]
+            args = [leverageFactor, amountOut, proxyble, tradeble, trader, deadline]
           } else {
             methodName = 'openPositionETH'
-            args = [leverageFactor, '0x0', tradeble, trader, deadline]
+            args = [leverageFactor, amountOut, tradeble, trader, deadline]
           }
           value = amountIn
         } else if (!isOpenPosition && !lendable) {
           if (proxyble) {
             methodName = 'closeProxyPositionETH'
-            args = [amountIn, '0x0', proxyble, tradeble, trader, deadline]
+            args = [amountIn, amountOut, proxyble, tradeble, trader, deadline]
           } else {
             methodName = 'closePositionETH'
-            args = [amountIn, '0x0', tradeble, trader, deadline]
+            args = [amountIn, amountOut, tradeble, trader, deadline]
           }
           value = ZERO_HEX
         } else {
@@ -136,18 +132,18 @@ export abstract class Router {
             if (isOpenPosition) {
               if (proxyble) {
                 methodName = 'openProxyShortPosition'
-                args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline]
+                args = [amountIn, leverageFactor, amountOut, lendable, proxyble, tradeble, trader, deadline]
               } else {
                 methodName = 'openShortPosition'
-                args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
+                args = [amountIn, leverageFactor, amountOut, lendable, tradeble, trader, deadline]
               }
             } else {
               if (proxyble) {
                 methodName = 'closeProxyShortPosition'
-                args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline]
+                args = [amountIn, amountOut, lendable, proxyble, tradeble, trader, deadline]
               } else {
                 methodName = 'closeShortPosition'
-                args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
+                args = [amountIn, amountOut, lendable, tradeble, trader, deadline]
               }
             }
           } else {
@@ -157,11 +153,11 @@ export abstract class Router {
               }
               if (proxyble) {
                 methodName = 'openProxyPosition'
-                args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline]
+                args = [amountIn, leverageFactor, amountOut, lendable, proxyble, tradeble, trader, deadline]
                 value = ZERO_HEX
               } else {
                 methodName = 'openPosition'
-                args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline]
+                args = [amountIn, leverageFactor, amountOut, lendable, tradeble, trader, deadline]
                 value = ZERO_HEX
               }
             } else {
@@ -170,11 +166,11 @@ export abstract class Router {
               }
               if (proxyble) {
                 methodName = 'closeProxyPosition'
-                args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline]
+                args = [amountIn, amountOut, lendable, proxyble, tradeble, trader, deadline]
                 value = ZERO_HEX
               } else {
                 methodName = 'closePosition'
-                args = [amountIn, '0x0', lendable, tradeble, trader, deadline]
+                args = [amountIn, amountOut, lendable, tradeble, trader, deadline]
                 value = ZERO_HEX
               }
             }

@@ -1407,12 +1407,9 @@ var Router = /*#__PURE__*/function () {
     !!(etherIn && etherOut) ? process.env.NODE_ENV !== "production" ? invariant(false, 'ETHER_IN_OUT') : invariant(false) : void 0;
     !(options.ttl > 0) ? process.env.NODE_ENV !== "production" ? invariant(false, 'TTL') : invariant(false) : void 0;
     var trader = validateAndParseAddress(options.recipient);
-    var amountIn = toHex(options.amountIn); // const amountIn: string = toHex(trade.maximumAmountIn(options.allowedSlippage))
-    // const amountOut: string = toHex(trade.minimumAmountOut(options.allowedSlippage))
-    // const path: string[] = trade.route.path.map(token => token.address)
-
-    var deadline = "0x" + (Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16); // const useFeeOnTransfer = Boolean(options.feeOnTransfer)
-
+    var amountIn = toHex(options.amountIn);
+    var amountOut = toHex(trade.minimumAmountOut(options.allowedSlippage));
+    var deadline = "0x" + (Math.floor(new Date().getTime() / 1000) + options.ttl).toString(16);
     var leverageFactor = "0x" + Math.floor((options.leverageFactor || 1) * Math.pow(10, 4)).toString(16);
     var isOpenPosition = options.isOpenPosition,
         lendable = options.lendable,
@@ -1428,20 +1425,20 @@ var Router = /*#__PURE__*/function () {
         if (etherIn) {
           if (proxyble) {
             methodName = 'openProxyPositionETH';
-            args = [leverageFactor, '0x0', proxyble, tradeble, trader, deadline];
+            args = [leverageFactor, amountOut, proxyble, tradeble, trader, deadline];
           } else {
             methodName = 'openPositionETH';
-            args = [leverageFactor, '0x0', tradeble, trader, deadline];
+            args = [leverageFactor, amountOut, tradeble, trader, deadline];
           }
 
           value = amountIn;
         } else if (!isOpenPosition && !lendable) {
           if (proxyble) {
             methodName = 'closeProxyPositionETH';
-            args = [amountIn, '0x0', proxyble, tradeble, trader, deadline];
+            args = [amountIn, amountOut, proxyble, tradeble, trader, deadline];
           } else {
             methodName = 'closePositionETH';
-            args = [amountIn, '0x0', tradeble, trader, deadline];
+            args = [amountIn, amountOut, tradeble, trader, deadline];
           }
 
           value = ZERO_HEX;
@@ -1454,18 +1451,18 @@ var Router = /*#__PURE__*/function () {
             if (isOpenPosition) {
               if (proxyble) {
                 methodName = 'openProxyShortPosition';
-                args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline];
+                args = [amountIn, leverageFactor, amountOut, lendable, proxyble, tradeble, trader, deadline];
               } else {
                 methodName = 'openShortPosition';
-                args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline];
+                args = [amountIn, leverageFactor, amountOut, lendable, tradeble, trader, deadline];
               }
             } else {
               if (proxyble) {
                 methodName = 'closeProxyShortPosition';
-                args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline];
+                args = [amountIn, amountOut, lendable, proxyble, tradeble, trader, deadline];
               } else {
                 methodName = 'closeShortPosition';
-                args = [amountIn, '0x0', lendable, tradeble, trader, deadline];
+                args = [amountIn, amountOut, lendable, tradeble, trader, deadline];
               }
             }
           } else {
@@ -1476,11 +1473,11 @@ var Router = /*#__PURE__*/function () {
 
               if (proxyble) {
                 methodName = 'openProxyPosition';
-                args = [amountIn, leverageFactor, '0x0', lendable, proxyble, tradeble, trader, deadline];
+                args = [amountIn, leverageFactor, amountOut, lendable, proxyble, tradeble, trader, deadline];
                 value = ZERO_HEX;
               } else {
                 methodName = 'openPosition';
-                args = [amountIn, leverageFactor, '0x0', lendable, tradeble, trader, deadline];
+                args = [amountIn, leverageFactor, amountOut, lendable, tradeble, trader, deadline];
                 value = ZERO_HEX;
               }
             } else {
@@ -1490,11 +1487,11 @@ var Router = /*#__PURE__*/function () {
 
               if (proxyble) {
                 methodName = 'closeProxyPosition';
-                args = [amountIn, '0x0', lendable, proxyble, tradeble, trader, deadline];
+                args = [amountIn, amountOut, lendable, proxyble, tradeble, trader, deadline];
                 value = ZERO_HEX;
               } else {
                 methodName = 'closePosition';
-                args = [amountIn, '0x0', lendable, tradeble, trader, deadline];
+                args = [amountIn, amountOut, lendable, tradeble, trader, deadline];
                 value = ZERO_HEX;
               }
             }
