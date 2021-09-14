@@ -23,6 +23,7 @@ export class Currency {
    * The only instance of the base class `Currency`. For different networks
    */
   public static readonly ETHER_MAP : Record<ChainId, Currency> = {
+    [ChainId.ROPSTEN]: new Currency(18, 'ETH', 'Ethereum'),
     [ChainId.MAINNET]: new Currency(18, 'BNB', 'Binance'),
     [ChainId.BSCTESTNET]: new Currency(18, 'BNB', 'Binance'),
     [ChainId.LOCALNET]: new Currency(18, 'BNB', 'Binance'),

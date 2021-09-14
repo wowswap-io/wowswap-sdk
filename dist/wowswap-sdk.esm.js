@@ -16,6 +16,7 @@ var _FACTORY_ADDRESS, _INIT_CODE_HASH, _SOLIDITY_TYPE_MAXIMA;
 var ChainId;
 
 (function (ChainId) {
+  ChainId[ChainId["ROPSTEN"] = 3] = "ROPSTEN";
   ChainId[ChainId["MAINNET"] = 56] = "MAINNET";
   ChainId[ChainId["BSCTESTNET"] = 97] = "BSCTESTNET";
   ChainId[ChainId["HECO"] = 128] = "HECO";
@@ -38,8 +39,8 @@ var Rounding;
   Rounding[Rounding["ROUND_UP"] = 2] = "ROUND_UP";
 })(Rounding || (Rounding = {}));
 
-var FACTORY_ADDRESS = (_FACTORY_ADDRESS = {}, _FACTORY_ADDRESS[ChainId.MAINNET] = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73', _FACTORY_ADDRESS[ChainId.BSCTESTNET] = '0xDC977fd78f7A02cce441976c98D464F51f4C5Fa9', _FACTORY_ADDRESS[ChainId.HECO] = '0xb0b670fc1F7724119963018DB0BfA86aDb22d941', _FACTORY_ADDRESS[ChainId.MATIC] = '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32', _FACTORY_ADDRESS[ChainId.LOCALNET] = '0x5C249F8d20b0275fFFdebe7d7b6CdE4baF6F8fb2', _FACTORY_ADDRESS);
-var INIT_CODE_HASH = (_INIT_CODE_HASH = {}, _INIT_CODE_HASH[ChainId.MAINNET] = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5', _INIT_CODE_HASH[ChainId.BSCTESTNET] = '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105', _INIT_CODE_HASH[ChainId.HECO] = '0x2ad889f82040abccb2649ea6a874796c1601fb67f91a747a80e08860c73ddf24', _INIT_CODE_HASH[ChainId.MATIC] = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f', _INIT_CODE_HASH[ChainId.LOCALNET] = '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105', _INIT_CODE_HASH);
+var FACTORY_ADDRESS = (_FACTORY_ADDRESS = {}, _FACTORY_ADDRESS[ChainId.ROPSTEN] = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4', _FACTORY_ADDRESS[ChainId.MAINNET] = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73', _FACTORY_ADDRESS[ChainId.BSCTESTNET] = '0xDC977fd78f7A02cce441976c98D464F51f4C5Fa9', _FACTORY_ADDRESS[ChainId.HECO] = '0xb0b670fc1F7724119963018DB0BfA86aDb22d941', _FACTORY_ADDRESS[ChainId.MATIC] = '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32', _FACTORY_ADDRESS[ChainId.LOCALNET] = '0x5C249F8d20b0275fFFdebe7d7b6CdE4baF6F8fb2', _FACTORY_ADDRESS);
+var INIT_CODE_HASH = (_INIT_CODE_HASH = {}, _INIT_CODE_HASH[ChainId.ROPSTEN] = '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303', _INIT_CODE_HASH[ChainId.MAINNET] = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5', _INIT_CODE_HASH[ChainId.BSCTESTNET] = '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105', _INIT_CODE_HASH[ChainId.HECO] = '0x2ad889f82040abccb2649ea6a874796c1601fb67f91a747a80e08860c73ddf24', _INIT_CODE_HASH[ChainId.MATIC] = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f', _INIT_CODE_HASH[ChainId.LOCALNET] = '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105', _INIT_CODE_HASH);
 var MINIMUM_LIQUIDITY = /*#__PURE__*/JSBI.BigInt(1000); // exports for internal consumption
 
 var ZERO = /*#__PURE__*/JSBI.BigInt(0);
@@ -385,7 +386,7 @@ Currency.ETHER = /*#__PURE__*/new Currency(18, 'BNB', 'Native Token');
  * The only instance of the base class `Currency`. For different networks
  */
 
-Currency.ETHER_MAP = (_Currency$ETHER_MAP = {}, _Currency$ETHER_MAP[ChainId.MAINNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.BSCTESTNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.LOCALNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.MATIC] = /*#__PURE__*/new Currency(18, 'MATIC', 'Matic'), _Currency$ETHER_MAP[ChainId.HECO] = /*#__PURE__*/new Currency(18, 'HT', 'Heco Token'), _Currency$ETHER_MAP);
+Currency.ETHER_MAP = (_Currency$ETHER_MAP = {}, _Currency$ETHER_MAP[ChainId.ROPSTEN] = /*#__PURE__*/new Currency(18, 'ETH', 'Ethereum'), _Currency$ETHER_MAP[ChainId.MAINNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.BSCTESTNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.LOCALNET] = /*#__PURE__*/new Currency(18, 'BNB', 'Binance'), _Currency$ETHER_MAP[ChainId.MATIC] = /*#__PURE__*/new Currency(18, 'MATIC', 'Matic'), _Currency$ETHER_MAP[ChainId.HECO] = /*#__PURE__*/new Currency(18, 'HT', 'Heco Token'), _Currency$ETHER_MAP);
 var ETHER = Currency.ETHER;
 
 var _WETH;
@@ -451,7 +452,7 @@ function currencyEquals(currencyA, currencyB) {
     return currencyA === currencyB;
   }
 }
-var WETH = (_WETH = {}, _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.MATIC] = /*#__PURE__*/new Token(ChainId.MATIC, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped MATIC'), _WETH[ChainId.HECO] = /*#__PURE__*/new Token(ChainId.HECO, '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f', 18, 'WHT', 'Wrapped HT'), _WETH[ChainId.BSCTESTNET] = /*#__PURE__*/new Token(ChainId.BSCTESTNET, '0xDa097367d6be37ca72A1FedfCa592eCb10FBb5Dd', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.LOCALNET] = /*#__PURE__*/new Token(ChainId.LOCALNET, '0x22A4Cc8c2C6881983ceBAb4d23cd952654Be2F1D', 18, 'WBNB', 'Wrapped BNB'), _WETH);
+var WETH = (_WETH = {}, _WETH[ChainId.ROPSTEN] = /*#__PURE__*/new Token(ChainId.ROPSTEN, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped ETH'), _WETH[ChainId.MAINNET] = /*#__PURE__*/new Token(ChainId.MAINNET, '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.MATIC] = /*#__PURE__*/new Token(ChainId.MATIC, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped MATIC'), _WETH[ChainId.HECO] = /*#__PURE__*/new Token(ChainId.HECO, '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f', 18, 'WHT', 'Wrapped HT'), _WETH[ChainId.BSCTESTNET] = /*#__PURE__*/new Token(ChainId.BSCTESTNET, '0xDa097367d6be37ca72A1FedfCa592eCb10FBb5Dd', 18, 'WBNB', 'Wrapped BNB'), _WETH[ChainId.LOCALNET] = /*#__PURE__*/new Token(ChainId.LOCALNET, '0x22A4Cc8c2C6881983ceBAb4d23cd952654Be2F1D', 18, 'WBNB', 'Wrapped BNB'), _WETH);
 
 var _toSignificantRoundin, _toFixedRounding;
 var Decimal = /*#__PURE__*/toFormat(_Decimal);

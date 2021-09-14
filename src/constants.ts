@@ -4,6 +4,7 @@ import JSBI from 'jsbi'
 export type BigintIsh = JSBI | bigint | string
 
 export enum ChainId {
+  ROPSTEN = 3,
   MAINNET = 56,
   BSCTESTNET = 97,
   HECO = 128,
@@ -23,6 +24,7 @@ export enum Rounding {
 }
 
 export const FACTORY_ADDRESS = {
+  [ChainId.ROPSTEN]: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
   [ChainId.MAINNET]: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
   [ChainId.BSCTESTNET]: '0xDC977fd78f7A02cce441976c98D464F51f4C5Fa9',
   [ChainId.HECO]: '0xb0b670fc1F7724119963018DB0BfA86aDb22d941',
@@ -31,6 +33,7 @@ export const FACTORY_ADDRESS = {
 }
 
 export const INIT_CODE_HASH = {
+  [ChainId.ROPSTEN]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
   [ChainId.MAINNET]: '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5',
   [ChainId.BSCTESTNET]: '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105',
   [ChainId.HECO]: '0x2ad889f82040abccb2649ea6a874796c1601fb67f91a747a80e08860c73ddf24',
