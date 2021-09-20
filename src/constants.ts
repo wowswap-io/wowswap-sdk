@@ -4,6 +4,7 @@ import JSBI from 'jsbi'
 export type BigintIsh = JSBI | bigint | string
 
 export enum ChainId {
+  ETHEREUM = 1,
   ROPSTEN = 3,
   MAINNET = 56,
   BSCTESTNET = 97,
@@ -23,7 +24,8 @@ export enum Rounding {
   ROUND_UP
 }
 
-export const FACTORY_ADDRESS = {
+export const FACTORY_ADDRESS : Record<ChainId, string> = {
+  [ChainId.ETHEREUM]: '0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac',
   [ChainId.ROPSTEN]: '0xc35DADB65012eC5796536bD9864eD8773aBc74C4',
   [ChainId.MAINNET]: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
   [ChainId.BSCTESTNET]: '0xDC977fd78f7A02cce441976c98D464F51f4C5Fa9',
@@ -32,7 +34,8 @@ export const FACTORY_ADDRESS = {
   [ChainId.LOCALNET]: '0x5C249F8d20b0275fFFdebe7d7b6CdE4baF6F8fb2'
 }
 
-export const INIT_CODE_HASH = {
+export const INIT_CODE_HASH : Record< ChainId, string> = {
+  [ChainId.ETHEREUM]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
   [ChainId.ROPSTEN]: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
   [ChainId.MAINNET]: '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5',
   [ChainId.BSCTESTNET]: '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105',
