@@ -7,7 +7,9 @@ export declare enum ChainId {
     BSCTESTNET = 97,
     HECO = 128,
     MATIC = 137,
-    LOCALNET = 57
+    LOCALNET = 57,
+    AVALANCE = 43114,
+    FUJI = 43113
 }
 export declare enum TradeType {
     EXACT_INPUT = 0,
