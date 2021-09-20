@@ -10,7 +10,9 @@ export enum ChainId {
   BSCTESTNET = 97,
   HECO = 128,
   MATIC = 137,
-  LOCALNET = 57
+  LOCALNET = 57,
+  AVALANCE = 43114,
+  FUJI = 43113,
 }
 
 export enum TradeType {
@@ -31,7 +33,9 @@ export const FACTORY_ADDRESS : Record<ChainId, string> = {
   [ChainId.BSCTESTNET]: '0xDC977fd78f7A02cce441976c98D464F51f4C5Fa9',
   [ChainId.HECO]: '0xb0b670fc1F7724119963018DB0BfA86aDb22d941',
   [ChainId.MATIC]: '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32',
-  [ChainId.LOCALNET]: '0x5C249F8d20b0275fFFdebe7d7b6CdE4baF6F8fb2'
+  [ChainId.LOCALNET]: '0x5C249F8d20b0275fFFdebe7d7b6CdE4baF6F8fb2',
+  [ChainId.AVALANCE]: '0xefa94DE7a4656D787667C749f7E1223D71E9FD88',
+  [ChainId.FUJI]: ''
 }
 
 export const INIT_CODE_HASH : Record< ChainId, string> = {
@@ -41,7 +45,9 @@ export const INIT_CODE_HASH : Record< ChainId, string> = {
   [ChainId.BSCTESTNET]: '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105',
   [ChainId.HECO]: '0x2ad889f82040abccb2649ea6a874796c1601fb67f91a747a80e08860c73ddf24',
   [ChainId.MATIC]: '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f',
-  [ChainId.LOCALNET]: '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105'
+  [ChainId.LOCALNET]: '0x47068d4959be190c4e0ac98fde3cbd272de2a1fb2b372e143cc3f866825fd105',
+  [ChainId.AVALANCE]: '0x40231f6b438bce0797c9ada29b718a87ea0a5cea3fe9a771abdd76bd41a3e545',
+  [ChainId.FUJI]: ''
 }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)

@@ -57,6 +57,20 @@ export function currencyEquals(currencyA: Currency, currencyB: Currency): boolea
 }
 
 export const WETH: Record<ChainId, Token> = {
+  [ChainId.AVALANCE]: new Token(
+    ChainId.AVALANCE,
+    '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
+    18,
+    'WAVAX',
+    'Wrapped AVAX'
+  ),
+  [ChainId.FUJI]: new Token(
+    ChainId.FUJI,
+    '0xd00ae08403B9bbb9124bB305C09058E32C39A48c',
+    18,
+    'WAVAX',
+    'Wrapped AVAX'
+  ),
   [ChainId.ETHEREUM]: new Token(
     ChainId.ETHEREUM,
     '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',

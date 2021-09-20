@@ -30,6 +30,8 @@ export class Currency {
     [ChainId.LOCALNET]: new Currency(18, 'BNB', 'Binance'),
     [ChainId.MATIC]: new Currency(18, 'MATIC', 'Matic'),
     [ChainId.HECO]: new Currency(18, 'HT', 'Heco Token'),
+    [ChainId.AVALANCE]: new Currency(18, 'AVAX', 'Avalance Token'),
+    [ChainId.FUJI]: new Currency(18, 'AVAX', 'Avalance Token')
   }
 
   public static getBaseCurrency() {
